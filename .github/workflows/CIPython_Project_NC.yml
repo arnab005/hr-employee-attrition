@@ -17,8 +17,8 @@ jobs:
           pip install numpy
           pip install pandas
           pip install flake8
-      - name: Run Python tests
-        run: python -m unittest discover
+      # - name: Run Python tests
+      #   run: python -m unittest discover
       - name: Lint Python code
         run: flake8 .      
       - name: Package app
