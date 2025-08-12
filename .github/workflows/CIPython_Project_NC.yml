@@ -1,0 +1,30 @@
+name: Python CI_Non-containerization
+on:
+  workflow_dispatch
+jobs:
+  CI_Non-conterization_build:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout code
+        uses: actions/checkout@v4.2.2
+      - name: Setup Python
+        uses: actions/setup-python@v5.6.0
+        with:
+          python-version: '3.13'
+      - name: Python Dependency Installation
+        run: |
+          pip install requests
+          pip install numpy
+          pip install pandas
+          pip install flake8
+      - name: Run Python tests
+        run: python -m unittest discover
+      - name: Lint Python code
+        run: flake8 .      
+      - name: Package app
+        run: python package_app.py
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: Package
+          path: Package.zip
